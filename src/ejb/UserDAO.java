@@ -7,7 +7,6 @@ import javax.persistence.PersistenceContext;
 
 import entities.User;
 
-
 @Stateless
 public class UserDAO {
 	
@@ -34,7 +33,5 @@ public class UserDAO {
 	public List<User> getAll() {
 		return entityManager.createNamedQuery("User.getAll", User.class).getResultList();
 	}
-
-	
 
 }

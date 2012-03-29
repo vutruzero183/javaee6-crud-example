@@ -1,4 +1,6 @@
-package managed;
+package backing;
+
+import static util.Messages.addFlashMessage;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -10,17 +12,27 @@ import entities.User;
 @ViewScoped
 @ManagedBean
 public class UserEdit {
+	
 	private User user;
 
 	@EJB
 	private UserDAO userDAO;
-	
+		
+	public void preRenderView() {
+		if (user == null) {
+			user = new User();
+		}
+	}
 
 	public String saveUser() {
-		if (user.getId() != null)
+		if (user.getId() != null) {
 			userDAO.update(user);
-		else
+		} 
+		else {
 			userDAO.save(user);
+		}
+		
+		addFlashMessage("User " + user.getId() + " saved");
 		
 		return "index.xhtml?faces-redirect=true";
 	}
@@ -30,12 +42,7 @@ public class UserEdit {
 	}
 
 	public User getUser() {
-		if (user == null) {
-			user = new User();
-		}
-
 		return user;
 	}
-
 
 }

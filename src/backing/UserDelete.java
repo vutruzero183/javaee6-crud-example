@@ -1,4 +1,4 @@
-package managed;
+package backing;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -10,24 +10,19 @@ import entities.User;
 @ViewScoped
 @ManagedBean
 public class UserDelete {
+	
 	private User user;
-	private int userId;
 	
 	@EJB
 	private UserDAO userDAO;
 	
 	public String delete() {
 		userDAO.delete(user);
-		return "index";
-	}
-
-	
-	public int getUserId() {
-		return userId;
+		return "index?faces-redirect=true";
 	}
 	
 	public String cancel() {
-		return "index";
+		return "index?faces-redirect=true";
 	}
 	
 	public User getUser() {
