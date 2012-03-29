@@ -2,7 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:rich="http://richfaces.org/rich">
 	
 	<f:metadata>
 		<f:viewParam name="user" value="#{userEdit.user}" converter="#{userConvertor}" />
@@ -15,7 +17,7 @@
 	
 	<h:body>
 		
-		<h:messages />
+		<rich:messages />
 		
 		<h:form>
 			
@@ -26,18 +28,25 @@
 				<h:outputLabel value="#{userEdit.user.id}" rendered="#{!empty userEdit.user.id}" />
 					
 				<h:outputLabel for="firstName" value="First name" />
-				<h:inputText id="firstName" value="#{userEdit.user.firstName}" label="First name" />
+				<h:inputText id="firstName" value="#{userEdit.user.firstName}" label="First name">
+					<rich:validator />
+				</h:inputText>
 				
 				<h:outputLabel for="lastName" value="Last name" />
-				<h:inputText id="lastName" value="#{userEdit.user.lastName}" label="Last name"  />
+				<h:inputText id="lastName" value="#{userEdit.user.lastName}" label="Last name">
+					<rich:validator />
+				</h:inputText>
 				
 				<h:outputLabel for="birthDay" value="Birth day" />
 				<h:inputText id="birthDay" value="#{userEdit.user.birthday}" label="Birth day">
 					<f:convertDateTime pattern="dd-MM-yyyy"/>
+					<rich:validator />
 				</h:inputText>
 				
 				<h:outputLabel for="email" value="Email" />
-				<h:inputText id="email" value="#{userEdit.user.email}" />
+				<h:inputText id="email" value="#{userEdit.user.email}">
+					<rich:validator />
+				</h:inputText>
 			
 				<h:commandButton action="#{userEdit.saveUser}" value="Submit" />
 				<h:button outcome="index.xhtml" value="Cancel"  />
